@@ -1,0 +1,31 @@
+<p *ngFor="let error of errors">{{error}}</p>
+<h2>Register a new user, pardner</h2>
+<!-- TEMPLATE BASED FORMS -->
+<form (submit)="register()" #registerForm="ngForm">
+  <p>  Email here: <input type="text" name="email" 
+      [(ngModel)]="newUser.email" #email="ngModel" minlength=5 required 
+    >
+  </p>
+  <p *ngIf="email.invalid && email.dirty" >Email must be at least five characters long</p>
+  <p>Name: <input type="text" name="name" [(ngModel)]="newUser.name"></p>
+  <p>Password:
+    <input type="password" name="password" [(ngModel)]="newUser.password" #password="ngModel">
+  </p>
+  <p>Password Confirmation:
+    <input type="password" name="passwordConfirmation" [(ngModel)]="newUser.passwordConfirmation" #passwordConf="ngModel">
+  </p>
+  <p *ngIf="newUser.password != newUser.passwordConfirmation">Passwords must match</p>
+  <input type="submit" [disabled]="registerForm.invalid || newUser.password != newUser.passwordConfirmation">
+
+</form>
+
+<h2>Login an existing user</h2>
+<form (submit)="login()">
+  <p> Email here:
+    <input type="text" name="email" [(ngModel)]="user.email">
+  </p>
+  <p>Password:
+    <input type="password" name="password" [(ngModel)]="user.password">
+  </p>
+  <input type="submit">
+</form>
